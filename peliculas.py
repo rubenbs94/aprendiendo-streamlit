@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-# import plotly.express as px
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Carga de datos
 data = pd.read_csv('peliculas.csv')
@@ -28,9 +29,14 @@ if selected_actor:
 st.write(data[['Title', 'Genre', 'Director', 'Actors', 'Year', 'Revenue (Millions)', 'Rating']])
 
 # Gráfico de ingresos vs puntuación
-#if not data.empty:
-   # fig = px.scatter(data, x='Revenue (Millions)', y='Rating', hover_data=['Title'], title='Ingresos vs Puntuación de Películas')
-   # st.plotly_chart(fig)
+if not data.empty:
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=data, x='Revenue (Millions)', y='Rating', hue='Genre', style='Genre', s=100)
+    plt.title('Ingresos vs Puntuación de Películas')
+    plt.xlabel('Ingresos (Millones de dólares)')
+    plt.ylabel('Puntuación')
+    plt.grid(True)
+    st.pyplot(plt)
 
 # Correr esto en la terminal:
 # streamlit run your_script_name.py
