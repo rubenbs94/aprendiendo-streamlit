@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Carga de datos
-data = pd.read_csv('path_to_your_file.csv')
+data = pd.read_csv('peliculas.csv')
 
 # Sidebar para filtros
 st.sidebar.header('Filtros')
