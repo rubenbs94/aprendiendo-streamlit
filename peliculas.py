@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 # Carga de datos
 data = pd.read_csv('peliculas.csv')
@@ -25,6 +26,11 @@ if selected_actor:
 
 # Mostrar datos filtrados
 st.write(data[['Title', 'Genre', 'Director', 'Actors', 'Year', 'Revenue (Millions)', 'Rating']])
+
+# Gráfico de ingresos vs puntuación
+if not data.empty:
+    fig = px.scatter(data, x='Revenue (Millions)', y='Rating', hover_data=['Title'], title='Ingresos vs Puntuación de Películas')
+    st.plotly_chart(fig)
 
 # Correr esto en la terminal:
 # streamlit run your_script_name.py
