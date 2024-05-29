@@ -4,9 +4,14 @@ import pandas as pd
 # Carga de datos
 data = pd.read_csv('peliculas.csv')
 
+# Extraer categorías únicas de géneros
+unique_genres = set()
+data['Genre'].apply(lambda x: unique_genres.update(x.split(',')))
+unique_genres = sorted(list(unique_genres))
+
 # Sidebar para filtros
 st.sidebar.header('Filtros')
-selected_genre = st.sidebar.selectbox('Género', options=['All'] + list(data['Genre'].unique()))
+selected_genre = st.sidebar.selectbox('Género', options=['All'] + unique_genres)
 selected_director = st.sidebar.selectbox('Director', options=['All'] + list(data['Director'].unique()))
 selected_actor = st.sidebar.text_input('Actor')
 
